@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "hotbarzoom",
+  "version": "1.0.0",
+  "name": "Hotbar Zoom",
+  "description": "Visually enlarges the hotbar by 2x.",
+  "authors": [
+    "YourName"
+  ],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "com.example.hotbarzoom.HotbarZoomMod"
+    ]
+  },
+  "mixins": [
+    "hotbarzoom.mixins.json"
+  ]
+}

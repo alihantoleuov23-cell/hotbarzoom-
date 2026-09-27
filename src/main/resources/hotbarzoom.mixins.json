@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "package": "com.example.hotbarzoom.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "InGameHudMixin"
+  ]
+}

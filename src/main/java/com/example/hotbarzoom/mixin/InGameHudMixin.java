@@ -1,6 +1,6 @@
 package com.example.hotbarzoom.mixin;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -15,24 +15,24 @@ public abstract class InGameHudMixin {
     private static final float HOTBAR_SCALE = 2.0F;
 
     @Shadow
-    private int scaledWidth;
+    private int screenWidth;
 
     @Shadow
-    private int scaledHeight;
+    private int screenHeight;
 
     @Inject(method = "renderHotbar", at = @At("HEAD"))
-    private void hotbarZoom$before(float tickDelta, GuiGraphics graphics, CallbackInfo ci) {
-        int hotbarX = this.scaledWidth / 2 - 91;
-        int hotbarY = this.scaledHeight - 22;
+    private void hotbarZoom$before(DrawContext context, CallbackInfo ci) {
+        int hotbarX = this.screenWidth / 2 - 91;
+        int hotbarY = this.screenHeight - 22;
 
-        graphics.getMatrices().push();
-        graphics.getMatrices().translate(hotbarX, hotbarY, 0);
-        graphics.getMatrices().scale(HOTBAR_SCALE, HOTBAR_SCALE, 1.0F);
-        graphics.getMatrices().translate(-hotbarX, -hotbarY, 0);
+        context.getMatrices().push();
+        context.getMatrices().translate(hotbarX, hotbarY, 0);
+        context.getMatrices().scale(HOTBAR_SCALE, HOTBAR_SCALE, 1.0F);
+        context.getMatrices().translate(-hotbarX, -hotbarY, 0);
     }
 
     @Inject(method = "renderHotbar", at = @At("RETURN"))
-    private void hotbarZoom$after(float tickDelta, GuiGraphics graphics, CallbackInfo ci) {
-        graphics.getMatrices().pop();
+    private void hotbarZoom$after(DrawContext context, CallbackInfo ci) {
+        context.getMatrices().pop();
     }
 }
